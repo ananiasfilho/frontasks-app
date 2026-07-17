@@ -47,6 +47,21 @@ Escolha a cor de fundo, a transparência e a cor de destaque — o mesmo app, co
   <img src="docs/panel.png"      alt="Tema roxo" width="230">
 </p>
 
+## 📥 Instalação
+
+1. Baixe o **`Frontasks-x.y.z.dmg`** mais recente em
+   [**Releases**](https://github.com/ananiasfilho/frontasks-app/releases).
+2. Abra o `.dmg` e **arraste o Frontasks para a pasta Applications**.
+3. Abra o Frontasks pelo Launchpad ou pela pasta Aplicativos.
+
+> **Primeira abertura.** O app é distribuído fora da App Store e assinado apenas
+> ad-hoc, então o macOS bloqueia na primeira vez. Para liberar, vá em
+> **Ajustes do Sistema → Privacidade e Segurança** e clique em **Abrir Assim Mesmo**,
+> ou rode no Terminal:
+> ```bash
+> xattr -dr com.apple.quarantine /Applications/Frontasks.app
+> ```
+
 ## 🧰 Requisitos
 
 - macOS 15+ (desenvolvido e testado no macOS 26 *Tahoe*).
