@@ -23,6 +23,7 @@ struct SettingsView: View {
     @AppStorage("accentHex") private var accentHex = "#3B82F6"
     @AppStorage("bgHex") private var bgHex = "#2C2C2E"
     @AppStorage("bgOpacity") private var bgOpacity = 0.55
+    @AppStorage("textHex") private var textHex = "auto"
     @AppStorage("fontName") private var fontName = "System"
     @AppStorage("fontSize") private var fontSize = 14.0
     @AppStorage("launchAtLogin") private var launchAtLogin = false
@@ -43,8 +44,31 @@ struct SettingsView: View {
         )
     }
 
+    private var customTextBinding: Binding<Color> {
+        Binding(
+            get: { textColor(textHex) },
+            set: { textHex = $0.hexString }
+        )
+    }
+
     private func isSelected(_ hex: String, _ current: String) -> Bool {
         current.caseInsensitiveCompare(hex) == .orderedSame
+    }
+
+    /// Swatch para a cor do texto — trata "auto" com um visual meio-a-meio.
+    @ViewBuilder
+    private func textSwatch(_ hex: String) -> some View {
+        let selected = isSelected(hex, textHex)
+        Circle()
+            .fill(hex == "auto"
+                  ? AnyShapeStyle(LinearGradient(colors: [.white, .black],
+                                                 startPoint: .topLeading, endPoint: .bottomTrailing))
+                  : AnyShapeStyle(Color(hex: hex)))
+            .frame(width: 26, height: 26)
+            .overlay(Circle().strokeBorder(Color.primary.opacity(0.15), lineWidth: 1))
+            .overlay(Circle().strokeBorder(Color.primary.opacity(selected ? 0.9 : 0), lineWidth: 2).padding(-3))
+            .contentShape(Circle())
+            .onTapGesture { textHex = hex }
     }
 
     private func swatch(_ hex: String, current: String, action: @escaping () -> Void) -> some View {
@@ -102,6 +126,21 @@ struct SettingsView: View {
                 .padding(.vertical, 4)
 
                 ColorPicker("Personalizada…", selection: customColorBinding, supportsOpacity: false)
+            }
+
+            Section("Cor do texto") {
+                LazyVGrid(
+                    columns: [GridItem(.adaptive(minimum: 30), spacing: 12)],
+                    spacing: 12
+                ) {
+                    ForEach(textPresets, id: \.hex) { preset in
+                        textSwatch(preset.hex)
+                            .help(preset.name)
+                    }
+                }
+                .padding(.vertical, 4)
+
+                ColorPicker("Personalizada…", selection: customTextBinding, supportsOpacity: false)
             }
 
             Section("Fonte") {

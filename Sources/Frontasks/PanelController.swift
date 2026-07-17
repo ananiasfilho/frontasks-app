@@ -30,7 +30,7 @@ final class PanelController: ObservableObject {
         NSApp.activate(ignoringOtherApps: true)
         if settingsWindow == nil {
             let w = NSWindow(
-                contentRect: NSRect(x: 0, y: 0, width: 400, height: 600),
+                contentRect: NSRect(x: 0, y: 0, width: 400, height: 680),
                 styleMask: [.titled, .closable, .resizable],
                 backing: .buffered,
                 defer: false

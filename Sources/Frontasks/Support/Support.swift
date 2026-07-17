@@ -28,6 +28,23 @@ func openSettingsWindow() {
     PanelController.shared.showSettings()
 }
 
+/// Paleta de cores do texto dos itens. "auto" = adapta a claro/escuro (padrão).
+let textPresets: [(name: String, hex: String)] = [
+    ("Automática",  "auto"),
+    ("Branco",      "#FFFFFF"),
+    ("Cinza claro", "#C7CBD1"),
+    ("Preto",       "#111111"),
+    ("Azul",        "#3B82F6"),
+    ("Verde",       "#22C55E"),
+    ("Amarelo",     "#EAB308"),
+    ("Vermelho",    "#EF4444"),
+]
+
+/// Cor de texto a partir da preferência ("auto" → cor primária adaptativa).
+func textColor(_ hex: String) -> Color {
+    hex == "auto" ? Color.primary : Color(hex: hex)
+}
+
 /// Paleta de cores de fundo do cartão (nome, hex).
 let backgroundPresets: [(name: String, hex: String)] = [
     ("Grafite",     "#2C2C2E"),

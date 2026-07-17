@@ -25,6 +25,7 @@ struct TaskListView: View {
     @AppStorage("bgOpacity") private var bgOpacity = 0.55
     @AppStorage("fontName") private var fontName = "System"
     @AppStorage("fontSize") private var fontSize = 14.0
+    @AppStorage("textHex") private var textHex = "auto"
 
     @State private var newTitle = ""
     @FocusState private var inputFocused: Bool
@@ -122,6 +123,7 @@ struct TaskListView: View {
             TextField("Nova tarefa…", text: $newTitle)
                 .textFieldStyle(.plain)
                 .font(uiFont)
+                .foregroundStyle(textColor(textHex))
                 .focused($inputFocused)
                 .onSubmit(add)
             if !newTitle.trimmingCharacters(in: .whitespaces).isEmpty {

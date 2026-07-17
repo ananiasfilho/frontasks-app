@@ -23,7 +23,10 @@ struct TaskRow: View {
     let accent: Color
     let font: Font
 
+    @AppStorage("textHex") private var textHex = "auto"
     @State private var hovering = false
+
+    private var itemColor: Color { textColor(textHex) }
 
     private var titleBinding: Binding<String> {
         Binding(
@@ -47,7 +50,7 @@ struct TaskRow: View {
                 .textFieldStyle(.plain)
                 .font(font)
                 .strikethrough(task.isDone)
-                .foregroundStyle(task.isDone ? .secondary : .primary)
+                .foregroundStyle(task.isDone ? itemColor.opacity(0.45) : itemColor)
 
             if hovering {
                 Button {
