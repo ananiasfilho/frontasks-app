@@ -7,8 +7,10 @@
 ## Núcleo (CRUD)
 - [ ] Criar tarefa (Enter no campo "Nova tarefa")
 - [ ] Editar título inline; digitar rápido não trava nem perde caracteres (debounce)
+- [ ] Esvaziar o título e confirmar (Enter ou clicar fora) → a tarefa é apagada
 - [ ] Concluir / desconcluir (checkbox) — risco + opacidade
 - [ ] Apagar (hover → lixeira)
+- [ ] Menu de contexto (botão direito na tarefa): Concluir/Reabrir e Apagar
 - [ ] Reordenar arrastando; a ordem persiste após reabrir
 - [ ] Limpar concluídas (borracha no cabeçalho)
 
