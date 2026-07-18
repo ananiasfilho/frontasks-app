@@ -45,7 +45,7 @@ compatibilidade de dados (mesmo formato de tarefas e preferências).
 <p align="center">
   <img src="macos/docs/theme-blue.png" alt="Tema azul" width="200">
   <img src="macos/docs/theme-red.png"  alt="Tema vermelho" width="200">
-  <img src="macos/docs/panel.png"      alt="Tema roxo" width="200">
+  <img src="macos/docs/theme-purple.png" alt="Tema roxo" width="200">
 </p>
 
 ## 🚀 Começando

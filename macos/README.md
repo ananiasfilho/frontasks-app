@@ -44,7 +44,7 @@ Escolha a cor de fundo, a transparência e a cor de destaque — o mesmo app, co
 <p align="center">
   <img src="docs/theme-blue.png" alt="Tema azul" width="230">
   <img src="docs/theme-red.png"  alt="Tema vermelho" width="230">
-  <img src="docs/panel.png"      alt="Tema roxo" width="230">
+  <img src="docs/theme-purple.png" alt="Tema roxo" width="230">
 </p>
 
 ## 📥 Instalação
