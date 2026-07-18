@@ -25,25 +25,30 @@ final class HotKeyManager {
     static let shared = HotKeyManager()
     private var hotKeyRef: EventHotKeyRef?
     private var installed = false
+    /// `true` somente se o atalho global foi registrado com sucesso.
+    private(set) var isActive = false
 
     private init() {}
 
     func registerDefault() {
         guard !installed else { return }
-        installed = true
 
         var eventType = EventTypeSpec(
             eventClass: OSType(kEventClassKeyboard),
             eventKind: UInt32(kEventHotKeyPressed)
         )
-        InstallEventHandler(GetApplicationEventTarget(), { _, _, _ -> OSStatus in
+        let handlerStatus = InstallEventHandler(GetApplicationEventTarget(), { _, _, _ -> OSStatus in
             DispatchQueue.main.async { PanelController.shared.toggle() }
             return noErr
         }, 1, &eventType, nil, nil)
+        guard handlerStatus == noErr else {
+            NSLog("Frontasks: não instalou o handler do atalho global (status \(handlerStatus)). Use o ícone da barra de menus.")
+            return
+        }
 
         // ⌥ (option) + Espaço. Para trocar: mude optionKey / kVK_Space abaixo.
         let hotKeyID = EventHotKeyID(signature: OSType(0x46524B59), id: 1) // 'FRKY'
-        RegisterEventHotKey(
+        let regStatus = RegisterEventHotKey(
             UInt32(kVK_Space),
             UInt32(optionKey),
             hotKeyID,
@@ -51,5 +56,12 @@ final class HotKeyManager {
             0,
             &hotKeyRef
         )
+        guard regStatus == noErr else {
+            NSLog("Frontasks: não registrou o atalho ⌥Espaço (status \(regStatus)) — pode estar em uso por outro app. Use o ícone da barra de menus.")
+            return
+        }
+
+        installed = true
+        isActive = true
     }
 }

@@ -34,6 +34,7 @@ final class TaskStore: ObservableObject {
     @Published var tasks: [TaskItem] = []
 
     private let url: URL
+    private var saveWork: DispatchWorkItem?
 
     private init() {
         let dir = FileManager.default
@@ -47,15 +48,35 @@ final class TaskStore: ObservableObject {
     // MARK: - Persistência
 
     func load() {
-        guard let data = try? Data(contentsOf: url),
-              let decoded = try? JSONDecoder().decode([TaskItem].self, from: data)
-        else { return }
-        tasks = decoded.sorted { ($0.order, $0.createdAt) < ($1.order, $1.createdAt) }
+        // Primeiro uso: arquivo ainda não existe — lista vazia, sem erro.
+        guard FileManager.default.fileExists(atPath: url.path) else { return }
+        do {
+            let data = try Data(contentsOf: url)
+            let decoded = try JSONDecoder().decode([TaskItem].self, from: data)
+            tasks = decoded.sorted { ($0.order, $0.createdAt) < ($1.order, $1.createdAt) }
+        } catch {
+            NSLog("Frontasks: falha ao ler tasks.json — \(error). Lista mantida como está.")
+        }
     }
 
+    /// Grava imediatamente (operações pontuais e no encerramento do app).
     func save() {
-        guard let data = try? JSONEncoder().encode(tasks) else { return }
-        try? data.write(to: url, options: .atomic)
+        saveWork?.cancel()
+        saveWork = nil
+        do {
+            let data = try JSONEncoder().encode(tasks)
+            try data.write(to: url, options: .atomic)
+        } catch {
+            NSLog("Frontasks: falha ao gravar tasks.json — \(error).")
+        }
+    }
+
+    /// Grava com pequeno atraso — para edição de texto (evita escrever a cada tecla).
+    private func saveDebounced() {
+        saveWork?.cancel()
+        let work = DispatchWorkItem { [weak self] in self?.save() }
+        saveWork = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: work)
     }
 
     // MARK: - CRUD
@@ -77,7 +98,7 @@ final class TaskStore: ObservableObject {
     func updateTitle(_ id: UUID, _ title: String) {
         guard let i = tasks.firstIndex(where: { $0.id == id }) else { return }
         tasks[i].title = title
-        save()
+        saveDebounced()
     }
 
     func delete(_ id: UUID) {

@@ -18,11 +18,12 @@
 set -euo pipefail
 
 APP_NAME="Frontasks"
-BUNDLE_ID="com.kmee.frontasks"
+BUNDLE_ID="com.ananiasfilho.frontasks"
+VERSION="${1:-0.1.1}"
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"
 
-echo "▸ Compilando (release)…"
+echo "Compilando (release) - versao ${VERSION}..."
 swift build -c release
 
 BIN="$ROOT/.build/release/$APP_NAME"
@@ -51,11 +52,11 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <key>CFBundlePackageType</key><string>APPL</string>
     <key>CFBundleIconFile</key><string>icon</string>
     <key>CFBundleIconName</key><string>icon</string>
-    <key>CFBundleShortVersionString</key><string>0.1.0</string>
-    <key>CFBundleVersion</key><string>1</string>
+    <key>CFBundleShortVersionString</key><string>$VERSION</string>
+    <key>CFBundleVersion</key><string>$VERSION</string>
     <key>LSMinimumSystemVersion</key><string>15.0</string>
     <key>LSUIElement</key><true/>
-    <key>NSHumanReadableCopyright</key><string>© 2026 kmee</string>
+    <key>NSHumanReadableCopyright</key><string>© 2026 Ananias Filho</string>
 </dict>
 </plist>
 PLIST

@@ -23,12 +23,12 @@ ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"
 
 APP_NAME="Frontasks"
-VERSION="${1:-0.1.0}"
+VERSION="${1:-0.1.1}"
 APP="$ROOT/$APP_NAME.app"
 DMG="$ROOT/dist/$APP_NAME-$VERSION.dmg"
 
-echo "Compilando o app..."
-./make-app.sh >/dev/null
+echo "Compilando o app (versão $VERSION)..."
+./make-app.sh "$VERSION" >/dev/null
 
 # Fundo da janela.
 BGDIR="$(mktemp -d)"

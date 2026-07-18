@@ -170,11 +170,20 @@ struct SettingsView: View {
             }
 
             Section("Sistema") {
-                Toggle("Iniciar ao ligar o Mac", isOn: $launchAtLogin)
-                    .onChange(of: launchAtLogin) { _, on in
-                        setLaunchAtLogin(on)
+                // O estado do toggle vem do sistema (SMAppService), então reflete
+                // a realidade — se registrar/desregistrar falhar, ele reverte sozinho.
+                Toggle("Iniciar ao ligar o Mac", isOn: Binding(
+                    get: { SMAppService.mainApp.status == .enabled },
+                    set: { setLaunchAtLogin($0) }
+                ))
+                LabeledContent("Atalho global (mostrar/ocultar)") {
+                    HStack(spacing: 6) {
+                        Text("Option / Alt (⌥) + Espaço")
+                        if !HotKeyManager.shared.isActive {
+                            Text("— indisponível").foregroundStyle(.orange)
+                        }
                     }
-                LabeledContent("Atalho global (mostrar/ocultar)", value: "Option / Alt (⌥) + Espaço")
+                }
             }
         }
         .formStyle(.grouped)
@@ -192,7 +201,9 @@ struct SettingsView: View {
                 try SMAppService.mainApp.unregister()
             }
         } catch {
-            NSLog("Frontasks: erro ao configurar início no login: \(error)")
+            NSLog("Frontasks: erro ao configurar início no login — \(error)")
         }
+        // Reflete o estado REAL registrado no sistema (reverte se a operação falhou).
+        launchAtLogin = (SMAppService.mainApp.status == .enabled)
     }
 }

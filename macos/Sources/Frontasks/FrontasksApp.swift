@@ -45,4 +45,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             PanelController.shared.showSettings()
         }
     }
+
+    /// Grava qualquer edição pendente (debounced) antes de encerrar.
+    func applicationWillTerminate(_ notification: Notification) {
+        TaskStore.shared.save()
+    }
 }
