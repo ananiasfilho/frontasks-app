@@ -23,7 +23,7 @@ ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"
 
 APP_NAME="Frontasks"
-VERSION="${1:-0.1.2}"
+VERSION="${1:-0.1.3}"
 APP="$ROOT/$APP_NAME.app"
 DMG="$ROOT/dist/$APP_NAME-$VERSION.dmg"
 

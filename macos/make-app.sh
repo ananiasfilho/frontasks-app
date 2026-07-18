@@ -19,20 +19,25 @@ set -euo pipefail
 
 APP_NAME="Frontasks"
 BUNDLE_ID="com.ananiasfilho.frontasks"
-VERSION="${1:-0.1.2}"
+VERSION="${1:-0.1.3}"
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"
 
-echo "Compilando (release) - versao ${VERSION}..."
-swift build -c release
+# Build universal (arm64 + x86_64). O build multi-arch nativo do SwiftPM exige Xcode
+# (xcbuild); sem Xcode, compilamos cada fatia por -target e juntamos com lipo.
+echo "Compilando (release) universal arm64+x86_64 - versao ${VERSION}..."
+swift build -c release --build-path .build-arm64 -Xswiftc -target -Xswiftc arm64-apple-macosx15.0
+swift build -c release --build-path .build-x86  -Xswiftc -target -Xswiftc x86_64-apple-macosx15.0
 
-BIN="$ROOT/.build/release/$APP_NAME"
 APP="$ROOT/$APP_NAME.app"
 
-echo "▸ Empacotando $APP_NAME.app…"
+echo "Empacotando $APP_NAME.app (universal)..."
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
-cp "$BIN" "$APP/Contents/MacOS/$APP_NAME"
+lipo -create \
+    ".build-arm64/release/$APP_NAME" \
+    ".build-x86/release/$APP_NAME" \
+    -output "$APP/Contents/MacOS/$APP_NAME"
 
 if [ -f "$ROOT/Icon/icon.icns" ]; then
     cp "$ROOT/Icon/icon.icns" "$APP/Contents/Resources/icon.icns"
