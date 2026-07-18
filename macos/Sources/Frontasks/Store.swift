@@ -40,7 +40,11 @@ final class TaskStore: ObservableObject {
         let dir = FileManager.default
             .urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("Frontasks", isDirectory: true)
-        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        do {
+            try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        } catch {
+            NSLog("Frontasks: falha ao criar a pasta de dados — \(error).")
+        }
         url = dir.appendingPathComponent("tasks.json")
         load()
     }
@@ -55,8 +59,20 @@ final class TaskStore: ObservableObject {
             let decoded = try JSONDecoder().decode([TaskItem].self, from: data)
             tasks = decoded.sorted { ($0.order, $0.createdAt) < ($1.order, $1.createdAt) }
         } catch {
-            NSLog("Frontasks: falha ao ler tasks.json — \(error). Lista mantida como está.")
+            // P0: NÃO destruir o arquivo do usuário. Preserva o inválido antes que
+            // qualquer save() (inclusive o flush no encerramento) o sobrescreva com [].
+            backupCorruptStore(error)
         }
+    }
+
+    /// Faz backup de um `tasks.json` inválido para não perder as tarefas do usuário.
+    private func backupCorruptStore(_ error: Error) {
+        let fmt = DateFormatter()
+        fmt.dateFormat = "yyyy-MM-dd-HHmmss"
+        let backup = url.deletingLastPathComponent()
+            .appendingPathComponent("tasks.corrupt-\(fmt.string(from: Date())).json")
+        try? FileManager.default.copyItem(at: url, to: backup)
+        NSLog("Frontasks: tasks.json inválido (\(error)). Backup preservado em \(backup.lastPathComponent). Iniciando com lista vazia.")
     }
 
     /// Grava imediatamente (operações pontuais e no encerramento do app).

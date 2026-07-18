@@ -30,8 +30,16 @@
 ## Persistência
 - [ ] Fechar e reabrir mantém as tarefas
 - [ ] Editar um título e **sair imediatamente** (< 0,5s) NÃO perde a edição (flush no encerrar)
-- [ ] `tasks.json` inválido/corrompido: app abre sem crashar; erro visível no Console
+- [ ] `tasks.json` inválido/corrompido: app abre sem crashar; **o arquivo NÃO é
+      destruído** — vira `tasks.corrupt-<data>.json` e o app inicia com lista vazia
 - [ ] Pasta sem permissão de escrita: erro é logado, app não trava
+
+## Ciclo de vida / instância
+- [ ] Abrir 2 cópias do `.app` → só **1** instância roda (a 2ª ativa a 1ª e encerra)
+- [ ] Com o app rodando, `open -n Frontasks.app --args --settings` **abre os Ajustes**
+      na instância viva (via IPC), sem 2º processo
+- [ ] Reabrir o app (Spotlight / clique no ícone) **mostra o painel**
+- [ ] Reiniciar o Mac com login ativo → **um único** Frontasks
 
 ## Ajustes
 - [ ] Cores (destaque, fundo + transparência, texto), fonte e tamanho aplicam ao vivo

@@ -20,7 +20,7 @@ Frontasks é um painel de tarefas que fica *sobre* os outros apps, sempre à vis
 
 | Plataforma | Status | Onde |
 |---|---|---|
-| **macOS** (SwiftUI + AppKit) | ✅ **Disponível** — v0.1.0 | [`macos/`](macos/) · [**Baixar (Releases)**](https://github.com/ananiasfilho/frontasks-app/releases) |
+| **macOS** (SwiftUI + AppKit) | ✅ **Disponível** ([última release](https://github.com/ananiasfilho/frontasks-app/releases/latest)) | [`macos/`](macos/) · [**Baixar**](https://github.com/ananiasfilho/frontasks-app/releases) |
 | **Linux** (GTK3, foco Mint Cinnamon) | 🚧 **Em desenvolvimento** | [`linux/`](linux/) |
 
 Este é um **monorepo**: cada plataforma tem sua pasta, com implementação nativa e

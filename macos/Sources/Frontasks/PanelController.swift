@@ -18,7 +18,7 @@ import SwiftUI
 
 /// Dono do painel flutuante. Cria sob demanda e alterna visibilidade.
 @MainActor
-final class PanelController: ObservableObject {
+final class PanelController {
     static let shared = PanelController()
     private var panel: FloatingPanel?
     private var settingsWindow: NSWindow?

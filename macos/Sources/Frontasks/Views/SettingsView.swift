@@ -26,7 +26,6 @@ struct SettingsView: View {
     @AppStorage("textHex") private var textHex = "auto"
     @AppStorage("fontName") private var fontName = "System"
     @AppStorage("fontSize") private var fontSize = 14.0
-    @AppStorage("launchAtLogin") private var launchAtLogin = false
 
     private let families: [String] = ["System"] + NSFontManager.shared.availableFontFamilies
 
@@ -188,11 +187,10 @@ struct SettingsView: View {
         }
         .formStyle(.grouped)
         .frame(minWidth: 380, maxWidth: .infinity, minHeight: 460, maxHeight: .infinity)
-        .onAppear {
-            launchAtLogin = (SMAppService.mainApp.status == .enabled)
-        }
     }
 
+    // O toggle lê `SMAppService.mainApp.status` direto (fonte da verdade), então
+    // basta tentar registrar/desregistrar; se falhar, o toggle reflete o estado real.
     private func setLaunchAtLogin(_ on: Bool) {
         do {
             if on {
@@ -203,7 +201,5 @@ struct SettingsView: View {
         } catch {
             NSLog("Frontasks: erro ao configurar início no login — \(error)")
         }
-        // Reflete o estado REAL registrado no sistema (reverte se a operação falhou).
-        launchAtLogin = (SMAppService.mainApp.status == .enabled)
     }
 }

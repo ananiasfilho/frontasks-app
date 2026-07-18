@@ -58,10 +58,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let others = NSRunningApplication.runningApplications(withBundleIdentifier: myID)
             .filter { $0 != .current }
         if !others.isEmpty {
+            // Preserva a intenção do lançamento (P1): a instância viva mostra os
+            // Ajustes ou o painel, em vez de a nova só ativar e morrer sem efeito.
+            let intent = CommandLine.arguments.contains("--settings") ? Intent.showSettings : Intent.showPanel
+            DistributedNotificationCenter.default().postNotificationName(
+                intent, object: nil, userInfo: nil, deliverImmediately: true)
             others.first?.activate()
             NSApp.terminate(nil)
             return
         }
+
+        // Instância primária: escuta intenções de lançamentos futuros.
+        registerIntentObservers()
 
         HotKeyManager.shared.registerDefault()
 
@@ -77,5 +85,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     /// Grava qualquer edição pendente (debounced) antes de encerrar.
     func applicationWillTerminate(_ notification: Notification) {
         TaskStore.shared.save()
+    }
+
+    /// Reabrir o app (Spotlight, clique no ícone) mostra o painel.
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows: Bool) -> Bool {
+        PanelController.shared.showPanel()
+        return true
+    }
+
+    /// Intenções entre instâncias: a nova publica, a viva executa. Corrige o fluxo
+    /// `--settings` / reabertura sob a guarda de instância única.
+    enum Intent {
+        static let showPanel = Notification.Name("com.ananiasfilho.frontasks.showPanel")
+        static let showSettings = Notification.Name("com.ananiasfilho.frontasks.showSettings")
+    }
+
+    private func registerIntentObservers() {
+        let dnc = DistributedNotificationCenter.default()
+        dnc.addObserver(forName: Intent.showPanel, object: nil, queue: .main) { _ in
+            PanelController.shared.showPanel()
+        }
+        dnc.addObserver(forName: Intent.showSettings, object: nil, queue: .main) { _ in
+            PanelController.shared.showSettings()
+        }
     }
 }

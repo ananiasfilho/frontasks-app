@@ -45,6 +45,7 @@ final class HotKeyManager {
             NSLog("Frontasks: não instalou o handler do atalho global (status \(handlerStatus)). Use o ícone da barra de menus.")
             return
         }
+        installed = true // handler instalado — não reinstalar em chamadas futuras (idempotência)
 
         // ⌥ (option) + Espaço. Para trocar: mude optionKey / kVK_Space abaixo.
         let hotKeyID = EventHotKeyID(signature: OSType(0x46524B59), id: 1) // 'FRKY'
@@ -61,7 +62,6 @@ final class HotKeyManager {
             return
         }
 
-        installed = true
         isActive = true
     }
 }
