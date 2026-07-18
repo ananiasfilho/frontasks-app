@@ -3,5 +3,5 @@
 .DS_Store
 *.xcodeproj
 .swiftpm/
-Icon/AppIcon.iconset/
+AppIcon.iconset/
 dist/
