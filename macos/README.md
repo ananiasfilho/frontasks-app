@@ -49,6 +49,14 @@ Escolha a cor de fundo, a transparência e a cor de destaque — o mesmo app, co
 
 ## 📥 Instalação
 
+### Homebrew (recomendado)
+
+```bash
+brew install --cask ananiasfilho/tap/frontasks
+```
+
+### DMG manual
+
 1. Baixe o **`Frontasks-x.y.z.dmg`** mais recente em
    [**Releases**](https://github.com/ananiasfilho/frontasks-app/releases).
 2. Abra o `.dmg` e **arraste o Frontasks para a pasta Applications**.

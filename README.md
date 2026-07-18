@@ -50,8 +50,9 @@ compatibilidade de dados (mesmo formato de tarefas e preferências).
 
 ## 🚀 Começando
 
-- **macOS:** baixe o `.dmg` em [Releases](https://github.com/ananiasfilho/frontasks-app/releases)
-  e arraste para Applications — ou compile do código em [`macos/`](macos/) (sem Xcode, via SwiftPM).
+- **macOS:** `brew install --cask ananiasfilho/tap/frontasks` — ou baixe o `.dmg` em
+  [Releases](https://github.com/ananiasfilho/frontasks-app/releases) e arraste para Applications
+  — ou compile do código em [`macos/`](macos/) (sem Xcode, via SwiftPM).
 - **Linux:** veja o guia de desenvolvimento em [`linux/`](linux/).
 
 ## 📄 Licença
