@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "frontasks"
+version = "0.1.0"
+description = "Painel de tarefas flutuante e sempre-no-topo (porte Linux/GTK3 do FronTasks)"
+requires-python = ">=3.8"
+# PyGObject e os bindings GTK/Keybinder/XApp vêm de pacotes do sistema
+# (ver README seção 5: apt install python3-gi gir1.2-gtk-3.0 ...), não do pip.
+
+[project.scripts]
+frontasks = "frontasks.__main__:main"
+
+[tool.setuptools]
+packages = ["frontasks"]
+
+[tool.setuptools.package-data]
+frontasks = ["data/icons/*.png"]

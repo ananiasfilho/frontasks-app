@@ -1,0 +1,24 @@
+# ISOs para validação de empacotamento (.deb/.rpm) do Frontasks
+# Resolvidos em 2026-07-17 (links "latest" oficiais, não fixei build number
+# à toa -- exceto onde a distro não deixou alternativa).
+
+# --- Ubuntu 26.04 LTS Desktop (~6.1 GB) ---
+https://releases.ubuntu.com/26.04/ubuntu-26.04-desktop-amd64.iso
+
+# --- Debian 13.6.0 "Trixie" Live, variante GNOME (~3-4 GB, tamanho exato
+# não confirmado -- o servidor não respondeu ao HEAD, só ao GET) ---
+https://cdimage.debian.org/debian-cd/current-live/amd64/iso-hybrid/debian-live-13.6.0-amd64-gnome.iso
+
+# --- Fedora 44 Workstation Live (~2.7 GB) ---
+https://download.fedoraproject.org/pub/fedora/linux/releases/44/Workstation/x86_64/iso/Fedora-Workstation-Live-44-1.7.x86_64.iso
+
+# --- openSUSE Leap 16.1 x86_64, "offline installer" (~4.24 GB) ---
+# Leap 16.x trocou o formato tradicional de DVD/NET por "offline installer"
+# (tudo embutido, sem precisar de rede) / "online installer" (baixa pacotes
+# durante a instalação). Usei o offline pra não depender de rede durante o
+# install. Nome sem número de build = symlink estável pro build mais recente.
+https://opensuse.c3sl.ufpr.br/distribution/leap/16.1/offline/Leap-16.1-offline-installer-x86_64.install.iso
+
+# --- Fallback: openSUSE Leap 15.6 DVD x86_64, formato tradicional (~4.3 GB) ---
+# Só usar se o offline installer do 16.1 der algum problema no boot/instalação.
+https://download.opensuse.org/distribution/leap/15.6/iso/openSUSE-Leap-15.6-DVD-x86_64-Media.iso

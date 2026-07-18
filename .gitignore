@@ -7,3 +7,14 @@
 .swiftpm/
 AppIcon.iconset/
 dist/
+
+# Linux build
+linux/build/
+linux/dist/
+linux/**/__pycache__/
+linux/**/*.egg-info/
+linux/packaging/deb/build/
+linux/packaging/rpm/out/
+*.AppImage
+*.deb
+*.rpm
