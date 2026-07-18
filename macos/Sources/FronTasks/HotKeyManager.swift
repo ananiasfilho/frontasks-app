@@ -1,4 +1,4 @@
-//  Frontasks — floating, always-on-top task list for macOS.
+//  FronTasks — floating, always-on-top task list for macOS.
 //  Copyright (C) 2026 Ananias Filho
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -42,7 +42,7 @@ final class HotKeyManager {
             return noErr
         }, 1, &eventType, nil, nil)
         guard handlerStatus == noErr else {
-            NSLog("Frontasks: não instalou o handler do atalho global (status \(handlerStatus)). Use o ícone da barra de menus.")
+            NSLog("FronTasks: não instalou o handler do atalho global (status \(handlerStatus)). Use o ícone da barra de menus.")
             return
         }
         installed = true // handler instalado — não reinstalar em chamadas futuras (idempotência)
@@ -58,7 +58,7 @@ final class HotKeyManager {
             &hotKeyRef
         )
         guard regStatus == noErr else {
-            NSLog("Frontasks: não registrou o atalho ⌥Espaço (status \(regStatus)) — pode estar em uso por outro app. Use o ícone da barra de menus.")
+            NSLog("FronTasks: não registrou o atalho ⌥Espaço (status \(regStatus)) — pode estar em uso por outro app. Use o ícone da barra de menus.")
             return
         }
 

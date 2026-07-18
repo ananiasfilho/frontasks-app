@@ -1,11 +1,11 @@
-# Frontasks
+# FronTasks
 
 **Lista de tarefas flutuante e sempre-no-topo para macOS — leve, redimensionável e discreta.**
 
-Frontasks é um painel de tarefas que fica *sobre* os outros apps, sempre à vista, sem roubar o foco do que você está fazendo. Sem ícone no Dock, sem peso: só as suas tarefas, num cartão translúcido que você posiciona e dimensiona como quiser.
+FronTasks é um painel de tarefas que fica *sobre* os outros apps, sempre à vista, sem roubar o foco do que você está fazendo. Sem ícone no Dock, sem peso: só as suas tarefas, num cartão translúcido que você posiciona e dimensiona como quiser.
 
 <p align="center">
-  <img src="docs/panel.png" alt="Painel do Frontasks" width="320">
+  <img src="docs/panel.png" alt="Painel do FronTasks" width="320">
 </p>
 
 <p align="center">
@@ -57,17 +57,17 @@ brew install --cask ananiasfilho/tap/frontasks
 
 ### DMG manual
 
-1. Baixe o **`Frontasks-x.y.z.dmg`** mais recente em
+1. Baixe o **`FronTasks-x.y.z.dmg`** mais recente em
    [**Releases**](https://github.com/ananiasfilho/frontasks-app/releases).
-2. Abra o `.dmg` e **arraste o Frontasks para a pasta Applications**.
-3. Abra o Frontasks pelo Launchpad ou pela pasta Aplicativos.
+2. Abra o `.dmg` e **arraste o FronTasks para a pasta Applications**.
+3. Abra o FronTasks pelo Launchpad ou pela pasta Aplicativos.
 
 > **Primeira abertura.** O app é distribuído fora da App Store e assinado apenas
 > ad-hoc, então o macOS bloqueia na primeira vez. Para liberar, vá em
 > **Ajustes do Sistema → Privacidade e Segurança** e clique em **Abrir Assim Mesmo**,
 > ou rode no Terminal:
 > ```bash
-> xattr -dr com.apple.quarantine /Applications/Frontasks.app
+> xattr -dr com.apple.quarantine /Applications/FronTasks.app
 > ```
 
 ## 🧰 Requisitos
@@ -82,11 +82,11 @@ brew install --cask ananiasfilho/tap/frontasks
 # 1. (opcional) gerar o ícone — já vem versionado em Icon/icon.icns
 ./make-icon.sh
 
-# 2. compilar e empacotar Frontasks.app (assinatura ad-hoc, uso local)
+# 2. compilar e empacotar FronTasks.app (assinatura ad-hoc, uso local)
 ./make-app.sh
 
 # 3. rodar
-open Frontasks.app
+open FronTasks.app
 ```
 
 O `make-app.sh` compila em modo release, monta o bundle `.app` com o `Info.plist`
@@ -100,7 +100,7 @@ O `make-app.sh` compila em modo release, monta o bundle `.app` com o `Info.plist
 - **Barra de menus:** ícone de checklist → mostrar/ocultar, ajustes, sair.
 - **Ajustes:** cor de destaque, cor de fundo + transparência, fonte, tamanho e
   iniciar no login. Também dá para abrir direto:
-  `open -n Frontasks.app --args --settings`.
+  `open -n FronTasks.app --args --settings`.
 
 ## 🏗️ Arquitetura
 
@@ -112,14 +112,14 @@ Aplicativo nativo, **SwiftUI + AppKit**, sem dependências externas:
 - **`HotKeyManager`** — atalho global via Carbon `RegisterEventHotKey`
   (sem exigir permissão de Acessibilidade).
 - **`TaskStore`** — persistência simples em **JSON** (`Codable` +
-  `ObservableObject`) em `~/Library/Application Support/Frontasks/tasks.json`.
+  `ObservableObject`) em `~/Library/Application Support/FronTasks/tasks.json`.
   *(SwiftData foi descartado de propósito: o macro `@Model` exige um plugin que
   só vem com o Xcode; JSON é mais leve e suficiente.)*
 - **Posição/tamanho** — persistidos com `setFrameAutosaveName`.
 
 ```
-Sources/Frontasks/
-├── FrontasksApp.swift     # @main, menu bar, ciclo de vida
+Sources/FronTasks/
+├── FronTasksApp.swift     # @main, menu bar, ciclo de vida
 ├── PanelController.swift  # cria/toggla o painel e a janela de Ajustes
 ├── FloatingPanel.swift    # NSPanel flutuante
 ├── HotKeyManager.swift    # atalho global (Carbon)
@@ -133,5 +133,5 @@ Sources/Frontasks/
 Distribuído sob a **GNU Affero General Public License v3.0** (AGPL-3.0).
 Veja o arquivo [LICENSE](LICENSE) para o texto completo.
 
-> Frontasks — floating, always-on-top task list for macOS.
+> FronTasks — floating, always-on-top task list for macOS.
 > Copyright (C) 2026 Ananias Filho

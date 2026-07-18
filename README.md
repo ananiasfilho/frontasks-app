@@ -1,11 +1,11 @@
-# Frontasks
+# FronTasks
 
 **Lista de tarefas flutuante e sempre-no-topo — leve, redimensionável e discreta.**
 
-Frontasks é um painel de tarefas que fica *sobre* os outros apps, sempre à vista, sem roubar o foco do que você está fazendo. Sem ícone no Dock/barra de tarefas: só as suas tarefas, num cartão translúcido que você posiciona e dimensiona como quiser.
+FronTasks é um painel de tarefas que fica *sobre* os outros apps, sempre à vista, sem roubar o foco do que você está fazendo. Sem ícone no Dock/barra de tarefas: só as suas tarefas, num cartão translúcido que você posiciona e dimensiona como quiser.
 
 <p align="center">
-  <img src="macos/docs/panel.png" alt="Frontasks" width="300">
+  <img src="macos/docs/panel.png" alt="FronTasks" width="300">
 </p>
 
 <p align="center">

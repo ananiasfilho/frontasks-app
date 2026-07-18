@@ -1,4 +1,4 @@
-//  Frontasks — floating, always-on-top task list for macOS.
+//  FronTasks — floating, always-on-top task list for macOS.
 //  Copyright (C) 2026 Ananias Filho
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -59,7 +59,7 @@ struct TaskListView: View {
     private var header: some View {
         HStack(spacing: 6) {
             Image(systemName: "checklist").foregroundStyle(accent)
-            Text("Frontasks").font(.headline)
+            Text("FronTasks").font(.headline)
             Spacer()
             if store.pendingCount > 0 {
                 Text("\(store.pendingCount)")

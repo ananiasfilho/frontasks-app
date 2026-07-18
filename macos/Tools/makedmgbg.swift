@@ -1,4 +1,4 @@
-//  Frontasks — floating, always-on-top task list for macOS.
+//  FronTasks — floating, always-on-top task list for macOS.
 //  Copyright (C) 2026 Ananias Filho
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -78,7 +78,7 @@ func drawCentered(_ s: String, size: CGFloat, weight: NSFont.Weight, color: NSCo
     str.draw(in: NSRect(x: 0, y: top(topY) - h, width: W, height: h))
 }
 
-drawCentered("Frontasks", size: 34, weight: .bold,
+drawCentered("FronTasks", size: 34, weight: .bold,
              color: NSColor(srgbRed: 0.11, green: 0.15, blue: 0.22, alpha: 1), topY: 48)
 drawCentered("Arraste o ícone para a pasta Applications", size: 15, weight: .regular,
              color: NSColor(srgbRed: 0.34, green: 0.40, blue: 0.47, alpha: 1), topY: 92)

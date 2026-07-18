@@ -1,4 +1,4 @@
-//  Frontasks — floating, always-on-top task list for macOS.
+//  FronTasks — floating, always-on-top task list for macOS.
 //  Copyright (C) 2026 Ananias Filho
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -39,11 +39,11 @@ final class TaskStore: ObservableObject {
     private init() {
         let dir = FileManager.default
             .urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("Frontasks", isDirectory: true)
+            .appendingPathComponent("Frontasks", isDirectory: true) // nome legado da pasta — mantido p/ preservar dados de instalações anteriores
         do {
             try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
         } catch {
-            NSLog("Frontasks: falha ao criar a pasta de dados — \(error).")
+            NSLog("FronTasks: falha ao criar a pasta de dados — \(error).")
         }
         url = dir.appendingPathComponent("tasks.json")
         load()
@@ -75,7 +75,7 @@ final class TaskStore: ObservableObject {
         let backup = url.deletingLastPathComponent()
             .appendingPathComponent("tasks.corrupt-\(fmt.string(from: Date())).json")
         try? FileManager.default.copyItem(at: url, to: backup)
-        NSLog("Frontasks: tasks.json inválido (\(error)). Backup preservado em \(backup.lastPathComponent). Iniciando com lista vazia.")
+        NSLog("FronTasks: tasks.json inválido (\(error)). Backup preservado em \(backup.lastPathComponent). Iniciando com lista vazia.")
     }
 
     /// Grava imediatamente (operações pontuais e no encerramento do app).
@@ -86,7 +86,7 @@ final class TaskStore: ObservableObject {
             let data = try JSONEncoder().encode(tasks)
             try data.write(to: url, options: .atomic)
         } catch {
-            NSLog("Frontasks: falha ao gravar tasks.json — \(error).")
+            NSLog("FronTasks: falha ao gravar tasks.json — \(error).")
         }
     }
 

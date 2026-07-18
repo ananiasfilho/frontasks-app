@@ -1,4 +1,4 @@
-//  Frontasks — floating, always-on-top task list for macOS.
+//  FronTasks — floating, always-on-top task list for macOS.
 //  Copyright (C) 2026 Ananias Filho
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -199,7 +199,7 @@ struct SettingsView: View {
                 try SMAppService.mainApp.unregister()
             }
         } catch {
-            NSLog("Frontasks: erro ao configurar início no login — \(error)")
+            NSLog("FronTasks: erro ao configurar início no login — \(error)")
         }
     }
 }

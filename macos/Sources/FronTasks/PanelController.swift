@@ -1,4 +1,4 @@
-//  Frontasks — floating, always-on-top task list for macOS.
+//  FronTasks — floating, always-on-top task list for macOS.
 //  Copyright (C) 2026 Ananias Filho
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -35,12 +35,12 @@ final class PanelController {
                 backing: .buffered,
                 defer: false
             )
-            w.title = "Ajustes do Frontasks"
+            w.title = "Ajustes do FronTasks"
             w.isReleasedWhenClosed = false
             // Nível normal (janela de preferências comum); a ativação abaixo a traz à frente.
             w.minSize = NSSize(width: 380, height: 460)
             w.contentView = NSHostingView(rootView: SettingsView())
-            w.setFrameAutosaveName("FrontasksSettings") // lembra o tamanho
+            w.setFrameAutosaveName("FrontasksSettings") // chave legada — lembra o tamanho já salvo
             if !w.setFrameUsingName("FrontasksSettings") {
                 w.center()
             }

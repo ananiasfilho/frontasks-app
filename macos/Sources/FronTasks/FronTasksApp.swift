@@ -1,4 +1,4 @@
-//  Frontasks — floating, always-on-top task list for macOS.
+//  FronTasks — floating, always-on-top task list for macOS.
 //  Copyright (C) 2026 Ananias Filho
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -19,18 +19,18 @@ import AppKit
 import ServiceManagement
 
 @main
-struct FrontasksApp: App {
+struct FronTasksApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
 
     var body: some Scene {
-        MenuBarExtra("Frontasks", systemImage: "checklist") {
+        MenuBarExtra("FronTasks", systemImage: "checklist") {
             Button("Mostrar / ocultar lista  (Option/Alt + Espaço)") {
                 PanelController.shared.toggle()
             }
             Button("Ajustes…") { openSettingsWindow() }
                 .keyboardShortcut(",")
             Divider()
-            Button("Sair do Frontasks") { NSApplication.shared.terminate(nil) }
+            Button("Sair do FronTasks") { NSApplication.shared.terminate(nil) }
                 .keyboardShortcut("q")
         }
     }
@@ -40,8 +40,8 @@ struct FrontasksApp: App {
 final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Comandos one-shot de manutenção do item de login (suporte/limpeza):
-        //   open Frontasks.app --args --login-off  → remove ESTE app do início no login
-        //   open Frontasks.app --args --login-on   → registra ESTE app no início no login
+        //   open FronTasks.app --args --login-off  → remove ESTE app do início no login
+        //   open FronTasks.app --args --login-on   → registra ESTE app no início no login
         if CommandLine.arguments.contains("--login-off") {
             try? SMAppService.mainApp.unregister()
             NSApp.terminate(nil); return
@@ -51,7 +51,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             NSApp.terminate(nil); return
         }
 
-        // Instância única: se já houver OUTRO Frontasks rodando (ex.: uma segunda
+        // Instância única: se já houver OUTRO FronTasks rodando (ex.: uma segunda
         // cópia do .app registrada no login, ou restauração de sessão do macOS),
         // ativa o existente e encerra esta. Garante que nunca haja dois painéis.
         let myID = Bundle.main.bundleIdentifier ?? "com.ananiasfilho.frontasks"
@@ -73,7 +73,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         HotKeyManager.shared.registerDefault()
 
-        // `open -n Frontasks.app --args --settings` abre direto os Ajustes,
+        // `open -n FronTasks.app --args --settings` abre direto os Ajustes,
         // SEM exibir o painel.
         if CommandLine.arguments.contains("--settings") {
             PanelController.shared.showSettings()

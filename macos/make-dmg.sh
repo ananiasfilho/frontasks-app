@@ -1,5 +1,5 @@
 #!/bin/bash
-# Frontasks — floating, always-on-top task list for macOS.
+# FronTasks — floating, always-on-top task list for macOS.
 # Copyright (C) 2026 Ananias Filho
 #
 # This program is free software: you can redistribute it and/or modify
@@ -15,15 +15,15 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Empacota o Frontasks.app num .dmg de instalacao com janela estilizada
+# Empacota o FronTasks.app num .dmg de instalacao com janela estilizada
 # (fundo com seta + icones posicionados, arraste para Applications).
 set -eo pipefail
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"
 
-APP_NAME="Frontasks"
-VERSION="${1:-0.1.5}"
+APP_NAME="FronTasks"
+VERSION="${1:-0.1.6}"
 APP="$ROOT/$APP_NAME.app"
 DMG="$ROOT/dist/$APP_NAME-$VERSION.dmg"
 

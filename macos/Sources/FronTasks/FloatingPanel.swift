@@ -1,4 +1,4 @@
-//  Frontasks — floating, always-on-top task list for macOS.
+//  FronTasks — floating, always-on-top task list for macOS.
 //  Copyright (C) 2026 Ananias Filho
 //
 //  This program is free software: you can redistribute it and/or modify
@@ -19,7 +19,7 @@ import AppKit
 /// Painel flutuante, redimensionável, que fica sobre as janelas normais
 /// sem roubar o foco do app onde você está trabalhando.
 final class FloatingPanel: NSPanel {
-    static let autosaveName = "FrontasksPanel"
+    static let autosaveName = "FrontasksPanel" // chave legada — preserva posição/tamanho já salvos
 
     init(contentRect: NSRect) {
         super.init(

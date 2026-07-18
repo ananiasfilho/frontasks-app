@@ -1,4 +1,4 @@
-# Frontasks (macOS) — Checklist de QA manual
+# FronTasks (macOS) — Checklist de QA manual
 
 > App nativo com muito comportamento dependente de contexto (janela, Spaces, login,
 > instalação). Não há testes automatizados de UI, então rode este roteiro antes de
@@ -36,10 +36,10 @@
 
 ## Ciclo de vida / instância
 - [ ] Abrir 2 cópias do `.app` → só **1** instância roda (a 2ª ativa a 1ª e encerra)
-- [ ] Com o app rodando, `open -n Frontasks.app --args --settings` **abre os Ajustes**
+- [ ] Com o app rodando, `open -n FronTasks.app --args --settings` **abre os Ajustes**
       na instância viva (via IPC), sem 2º processo
 - [ ] Reabrir o app (Spotlight / clique no ícone) **mostra o painel**
-- [ ] Reiniciar o Mac com login ativo → **um único** Frontasks
+- [ ] Reiniciar o Mac com login ativo → **um único** FronTasks
 
 ## Ajustes
 - [ ] Cores (destaque, fundo + transparência, texto), fonte e tamanho aplicam ao vivo

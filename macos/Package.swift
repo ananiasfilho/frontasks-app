@@ -2,14 +2,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "Frontasks",
+    name: "FronTasks",
     platforms: [
         .macOS("15")
     ],
     targets: [
         .executableTarget(
-            name: "Frontasks",
-            path: "Sources/Frontasks"
+            name: "FronTasks",
+            path: "Sources/FronTasks"
         )
     ]
 )
