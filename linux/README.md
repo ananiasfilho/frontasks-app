@@ -1,13 +1,13 @@
-# Frontasks — Guia de Port para Linux (Mint Cinnamon)
+# FronTasks — Guia de Port para Linux (Mint Cinnamon)
 
 > **Para quem é este documento:** é o *briefing* para desenvolver a versão **Linux**
-> do Frontasks, do zero, mantendo **paridade de comportamento** e **compatibilidade
+> do FronTasks, do zero, mantendo **paridade de comportamento** e **compatibilidade
 > de dados** com a versão macOS já pronta. Escrito para ser lido por um assistente
 > de código (outro Claude) rodando **direto no Linux Mint Cinnamon**.
 
 ---
 
-## 1. O que é o Frontasks
+## 1. O que é o FronTasks
 
 Um **painel de tarefas flutuante e sempre-no-topo**: fica *sobre* os outros apps,
 sempre à vista, sem roubar o foco do que você está fazendo. Leve, redimensionável e
@@ -226,7 +226,7 @@ Escrever `~/.config/autostart/frontasks.desktop`:
 ```ini
 [Desktop Entry]
 Type=Application
-Name=Frontasks
+Name=FronTasks
 Exec=frontasks
 Icon=frontasks
 X-GNOME-Autostart-enabled=true

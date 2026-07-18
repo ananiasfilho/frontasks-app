@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=FronTasks
+Comment=Painel de tarefas flutuante e sempre-no-topo
+Exec=frontasks
+Icon=frontasks
+Terminal=false
+Categories=Utility;
+StartupNotify=false
