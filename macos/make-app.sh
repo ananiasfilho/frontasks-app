@@ -19,7 +19,7 @@ set -euo pipefail
 
 APP_NAME="FronTasks"
 BUNDLE_ID="com.ananiasfilho.frontasks"
-VERSION="${1:-0.1.6}"
+VERSION="${1:-0.1.0}"
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"
 
