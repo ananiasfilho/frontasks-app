@@ -37,7 +37,7 @@ final class PanelController: ObservableObject {
             )
             w.title = "Ajustes do Frontasks"
             w.isReleasedWhenClosed = false
-            w.level = .floating // garante que apareça acima do painel flutuante
+            // Nível normal (janela de preferências comum); a ativação abaixo a traz à frente.
             w.minSize = NSSize(width: 380, height: 460)
             w.contentView = NSHostingView(rootView: SettingsView())
             w.setFrameAutosaveName("FrontasksSettings") // lembra o tamanho

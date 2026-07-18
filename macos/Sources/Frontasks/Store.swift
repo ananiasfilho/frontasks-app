@@ -101,6 +101,19 @@ final class TaskStore: ObservableObject {
         saveDebounced()
     }
 
+    /// Finaliza a edição de um título: remove espaços das pontas e, se ficar vazio,
+    /// apaga a tarefa. Deve ser chamado no commit (Enter/perda de foco), NUNCA a cada tecla.
+    func commitTitle(_ id: UUID) {
+        guard let i = tasks.firstIndex(where: { $0.id == id }) else { return }
+        let trimmed = tasks[i].title.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmed.isEmpty {
+            tasks.remove(at: i)
+        } else {
+            tasks[i].title = trimmed
+        }
+        save()
+    }
+
     func delete(_ id: UUID) {
         tasks.removeAll { $0.id == id }
         save()

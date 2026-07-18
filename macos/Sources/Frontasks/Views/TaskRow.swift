@@ -25,6 +25,7 @@ struct TaskRow: View {
 
     @AppStorage("textHex") private var textHex = "auto"
     @State private var hovering = false
+    @FocusState private var focused: Bool
 
     private var itemColor: Color { textColor(textHex) }
 
@@ -51,6 +52,11 @@ struct TaskRow: View {
                 .font(font)
                 .strikethrough(task.isDone)
                 .foregroundStyle(task.isDone ? itemColor.opacity(0.45) : itemColor)
+                .focused($focused)
+                .onSubmit { store.commitTitle(task.id) }
+                .onChange(of: focused) { _, isFocused in
+                    if !isFocused { store.commitTitle(task.id) }  // apaga se ficou vazio
+                }
 
             if hovering {
                 Button {
@@ -70,5 +76,9 @@ struct TaskRow: View {
                 .fill(hovering ? Color.primary.opacity(0.06) : Color.clear)
         )
         .onHover { hovering = $0 }
+        .contextMenu {
+            Button(task.isDone ? "Reabrir" : "Concluir") { store.toggle(task.id) }
+            Button("Apagar", role: .destructive) { store.delete(task.id) }
+        }
     }
 }

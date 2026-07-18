@@ -37,12 +37,14 @@ struct FrontasksApp: App {
 /// Cria o painel assim que o app termina de iniciar.
 final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
-        PanelController.shared.showPanel()
         HotKeyManager.shared.registerDefault()
 
-        // Permite abrir direto os Ajustes: `open -n Frontasks.app --args --settings`
+        // `open -n Frontasks.app --args --settings` abre direto os Ajustes,
+        // SEM exibir o painel.
         if CommandLine.arguments.contains("--settings") {
             PanelController.shared.showSettings()
+        } else {
+            PanelController.shared.showPanel()
         }
     }
 
