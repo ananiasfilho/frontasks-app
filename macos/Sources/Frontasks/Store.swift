@@ -59,8 +59,11 @@ final class TaskStore: ObservableObject {
             let decoded = try JSONDecoder().decode([TaskItem].self, from: data)
             tasks = decoded.sorted { ($0.order, $0.createdAt) < ($1.order, $1.createdAt) }
         } catch {
-            // P0: NÃO destruir o arquivo do usuário. Preserva o inválido antes que
-            // qualquer save() (inclusive o flush no encerramento) o sobrescreva com [].
+            // P0: em falha de decode, preserva o conteúdo original num backup
+            // (tasks.corrupt-<data>.json) ANTES que qualquer save() recrie o arquivo.
+            // Garantia: nenhum dado se perde sem rastro (fica no backup). NÃO é
+            // congelamento de gravações — o tasks.json principal ainda pode virar []
+            // no próximo save()/encerramento; a recuperação é via arquivo de backup.
             backupCorruptStore(error)
         }
     }
