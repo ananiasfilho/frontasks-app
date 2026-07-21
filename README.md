@@ -11,7 +11,7 @@ FronTasks é um painel de tarefas que fica *sobre* os outros apps, sempre à vis
 <p align="center">
   <img alt="Licença: AGPL v3" src="https://img.shields.io/badge/license-AGPL--3.0-green">
   <img alt="macOS 15+"        src="https://img.shields.io/badge/macOS-15%2B-black?logo=apple">
-  <img alt="Linux (WIP)"      src="https://img.shields.io/badge/Linux-em%20desenvolvimento-orange?logo=linux&logoColor=white">
+  <img alt="Linux"            src="https://img.shields.io/badge/Linux-dispon%C3%ADvel-green?logo=linux&logoColor=white">
 </p>
 
 ---
@@ -21,7 +21,7 @@ FronTasks é um painel de tarefas que fica *sobre* os outros apps, sempre à vis
 | Plataforma | Status | Onde |
 |---|---|---|
 | **macOS** (SwiftUI + AppKit) | ✅ **Disponível** ([última release](https://github.com/ananiasfilho/frontasks-app/releases/latest)) | [`macos/`](macos/) · [**Baixar**](https://github.com/ananiasfilho/frontasks-app/releases) |
-| **Linux** (GTK3, foco Mint Cinnamon) | 🚧 **Em desenvolvimento** | [`linux/`](linux/) |
+| **Linux** (GTK3, foco Mint Cinnamon) | ✅ **Disponível** — `.deb` (Debian/Ubuntu/Mint), `.rpm` (Fedora, openSUSE) | [`linux/`](linux/) · [**Baixar**](https://github.com/ananiasfilho/frontasks-app/releases) |
 
 Este é um **monorepo**: cada plataforma tem sua pasta, com implementação nativa e
 compatibilidade de dados (mesmo formato de tarefas e preferências).
@@ -53,7 +53,10 @@ compatibilidade de dados (mesmo formato de tarefas e preferências).
 - **macOS:** `brew install --cask ananiasfilho/tap/frontasks` — ou baixe o `.dmg` em
   [Releases](https://github.com/ananiasfilho/frontasks-app/releases) e arraste para Applications
   — ou compile do código em [`macos/`](macos/) (sem Xcode, via SwiftPM).
-- **Linux:** veja o guia de desenvolvimento em [`linux/`](linux/).
+- **Linux:** baixe o pacote da sua distro em
+  [Releases](https://github.com/ananiasfilho/frontasks-app/releases) — `.deb`
+  (Debian/Ubuntu/Mint), `.rpm` (Fedora, openSUSE). Ex.:
+  `sudo apt install ./frontasks_0.1.0_all.deb`. Detalhes em [`linux/`](linux/).
 
 ## 📄 Licença
 
