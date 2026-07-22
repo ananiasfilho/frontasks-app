@@ -25,6 +25,7 @@ struct TaskRow: View {
 
     @AppStorage("textHex") private var textHex = "auto"
     @State private var hovering = false
+    @State private var editing = false
     @FocusState private var focused: Bool
 
     private var itemColor: Color { textColor(textHex) }
@@ -47,16 +48,30 @@ struct TaskRow: View {
             }
             .buttonStyle(.plain)
 
-            TextField("", text: titleBinding)
-                .textFieldStyle(.plain)
-                .font(font)
-                .strikethrough(task.isDone)
-                .foregroundStyle(task.isDone ? itemColor.opacity(0.45) : itemColor)
-                .focused($focused)
-                .onSubmit { store.commitTitle(task.id) }
-                .onChange(of: focused) { _, isFocused in
-                    if !isFocused { store.commitTitle(task.id) }  // apaga se ficou vazio
-                }
+            if editing {
+                // Modo edição: campo de texto focado. Sai ao confirmar ou perder o foco.
+                TextField("", text: titleBinding)
+                    .textFieldStyle(.plain)
+                    .font(font)
+                    .foregroundStyle(itemColor)
+                    .focused($focused)
+                    .onSubmit { endEditing() }
+                    .onChange(of: focused) { _, isFocused in
+                        if !isFocused { endEditing() }  // clicar fora confirma (apaga se vazio)
+                    }
+                    .onAppear { focused = true }
+            } else {
+                // Modo leitura: duplo-clique para editar.
+                Text(task.title)
+                    .font(font)
+                    .strikethrough(task.isDone)
+                    .foregroundStyle(task.isDone ? itemColor.opacity(0.45) : itemColor)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(Rectangle())
+                    .onTapGesture(count: 2) { editing = true }
+            }
 
             if hovering {
                 Button {
@@ -77,8 +92,17 @@ struct TaskRow: View {
         )
         .onHover { hovering = $0 }
         .contextMenu {
+            Button("Editar") { editing = true }
             Button(task.isDone ? "Reabrir" : "Concluir") { store.toggle(task.id) }
             Button("Apagar", role: .destructive) { store.delete(task.id) }
         }
+    }
+
+    /// Confirma a edição: sai do modo edição e deixa o store consolidar
+    /// (que apaga a tarefa caso o título tenha ficado vazio).
+    private func endEditing() {
+        editing = false
+        focused = false
+        store.commitTitle(task.id)
     }
 }
